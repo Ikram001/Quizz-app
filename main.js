@@ -68,17 +68,64 @@ function removeAllClasses() {
   ans3.classList.remove("wrong", "right");
   ans4.classList.remove("wrong", "right");
 }
+let question1 = document.querySelector("#q1");
+let bodyDiv = document.querySelector(".questions-body");
 
 function setupNextListener() {
-  next.disabled = false;
   next.addEventListener("click", () => {
     enableAll();
     removeAllClasses();
+    bodyDiv.removeChild(question1);
+    let questionDiv = document.createElement("div");
+    questionDiv.classList.add("questions");
+    questionDiv.id = "q2";
+    questionDiv.innerHTML = `
+    <p class="questionPara" id="question2">2. What is acrophobia a fear of?</p>
+            <ul>
+                <li><button id="AnswerNumber1Q2">Heights</button></li>
+                <li><button id="AnswerNumber2Q2">Darkness</button></li>
+                <li><button id="AnswerNumber3Q2">Spiders</button></li>
+                <li><button id="AnswerNumber4Q2">Water</button></li>
+            </ul>
+    `;
+    document.querySelector("hr").insertAdjacentElement("afterend", questionDiv);
     next.style.display = "none";
-    nextQuestion.innerHTML = `2. What is acrophobia a fear of?`;
-    ans1.innerHTML = `Spiders`;
-    ans2.innerHTML = `Heights`;
-    ans3.innerHTML = `Darkness`;
-    ans4.innerHTML = `Water`;
+    let question2Answer1 = document.querySelector("#AnswerNumber1Q2");
+    let question2Answer2 = document.querySelector("#AnswerNumber2Q2");
+    let question2Answer3 = document.querySelector("#AnswerNumber3Q2");
+    let question2Answer4 = document.querySelector("#AnswerNumber4Q2");
+
+    question2Answer1.addEventListener("click", () => {
+      question2Answer1.classList.add("right");
+      question2Answer2.disabled = true;
+      question2Answer3.disabled = true;
+      question2Answer4.disabled = true;
+      next.style.display = "block";
+    });
+
+    // Other answers - mark as wrong
+    question2Answer2.addEventListener("click", () => {
+      question2Answer2.classList.add("wrong");
+      question2Answer1.classList.add("right");
+      question2Answer3.disabled = true;
+      question2Answer4.disabled = true;
+      next.style.display = "block";
+    });
+
+    question2Answer3.addEventListener("click", () => {
+      question2Answer3.classList.add("wrong");
+      question2Answer1.classList.add("right");
+      question2Answer2.disabled = true;
+      question2Answer4.disabled = true;
+      next.style.display = "block";
+    });
+
+    question2Answer4.addEventListener("click", () => {
+      question2Answer4.classList.add("wrong");
+      question2Answer1.classList.add("right");
+      question2Answer2.disabled = true;
+      question2Answer3.disabled = true;
+      next.style.display = "block";
+    });
   });
 }
