@@ -129,3 +129,65 @@ function setupNextListener() {
     });
   });
 }
+
+function loadQuestion3() {
+  let question2 = document.querySelector("#q2");
+  bodyDiv.removeChild(question2);
+  const questionDiv = document.createElement("div");
+  questionDiv.classList.add("questions");
+  questionDiv.id = "q3";
+  questionDiv.innerHTML = `
+    <p class="questionPara" id="question3">3. What is the largest planet in our solar system?</p>
+    <ul>
+      <li><button id="AnswerNumber1Q3">Earth</button></li>
+      <li><button id="AnswerNumber2Q3">Mars</button></li>
+      <li><button id="AnswerNumber3Q3">Jupiter</button></li>
+      <li><button id="AnswerNumber4Q3">Venus</button></li>
+    </ul>
+  `;
+  document.querySelector("hr").insertAdjacentElement("afterend", questionDiv);
+  next.style.display = "none";
+
+  let q3a1 = document.querySelector("#AnswerNumber1Q3");
+  let q3a2 = document.querySelector("#AnswerNumber2Q3");
+  let q3a3 = document.querySelector("#AnswerNumber3Q3"); // correct answer
+  let q3a4 = document.querySelector("#AnswerNumber4Q3");
+
+  q3a1.addEventListener("click", () => {
+    q3a1.classList.add("wrong");
+    q3a3.classList.add("right");
+    q3a2.disabled = true;
+    q3a3.disabled = true;
+    q3a4.disabled = true;
+    next.style.display = "block";
+  });
+
+  q3a2.addEventListener("click", () => {
+    q3a2.classList.add("wrong");
+    q3a3.classList.add("right");
+    q3a1.disabled = true;
+    q3a3.disabled = true;
+    q3a4.disabled = true;
+    next.style.display = "block";
+  });
+
+  q3a3.addEventListener("click", () => {
+    q3a3.classList.add("right");
+    q3a1.disabled = true;
+    q3a2.disabled = true;
+    q3a4.disabled = true;
+    next.style.display = "block";
+  });
+
+  q3a4.addEventListener("click", () => {
+    q3a4.classList.add("wrong");
+    q3a3.classList.add("right");
+    q3a1.disabled = true;
+    q3a2.disabled = true;
+    q3a3.disabled = true;
+    next.style.display = "block";
+  });
+}
+next.addEventListener("click", () => {
+  loadQuestion3();
+});
